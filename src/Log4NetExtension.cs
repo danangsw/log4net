@@ -1,6 +1,5 @@
 ﻿using log4net;
 using System;
-using Unity.Builder;
 using Unity.Extension;
 using Unity.Policy;
 
@@ -17,7 +16,7 @@ namespace Unity.log4net
             Context.Policies.Set(typeof(ILog), null, typeof(IBuildPlanPolicy), this);
         }
 
-        void IBuildPlanPolicy.BuildUp(IBuilderContext context)
+        void IBuildPlanPolicy.BuildUp<T>(ref T context)
         {
             Func<Type, string, string> method = GetName ?? _defaultGetName;
 #if NETSTANDARD1_3
